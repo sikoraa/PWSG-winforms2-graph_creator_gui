@@ -12,71 +12,145 @@ namespace WindowsFormsApp2
 {
     public partial class Form1 : Form
     {
-        Color c = new Color();
+        Color c;
+        //Graphics gr;
+        int r = 28;
+        int penWidth;
+        Pen p;//= new Pen(Color.Black, penWidth);
+        Pen selPen;
+
+        SolidBrush b;
+        Graph g = new Graph();
+        int selectedVertex = -1;
+
+        Font f;
+        StringFormat sf;
+
         public Form1()
         {
             InitializeComponent();
+            c = new Color();
+            c = Color.Black;
+            
+            penWidth = 3;
+            p = new Pen(Color.Black, penWidth);
+            selPen = new Pen(Color.Black, penWidth);
+            selPen.DashCap = System.Drawing.Drawing2D.DashCap.Round;
+            selPen.DashPattern = new float[] { 2, 1.7F };
+            b = new SolidBrush(Color.Black);
+            f = new Font("Arial", 10);
+            sf = new StringFormat();
+            sf.Alignment = StringAlignment.Center;
+            sf.LineAlignment = StringAlignment.Center;
+            this.SetStyle(ControlStyles.DoubleBuffer, true);
+
         }
+
+
 
         
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void jezykBox_Enter(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void kolorB_Click(object sender, EventArgs e)
         {
             ColorDialog MyDialog = new ColorDialog();
-            // Keeps the user from selecting a custom color.
             MyDialog.AllowFullOpen = false;
-            // Allows the user to get help. (The default is false.)
             MyDialog.ShowHelp = true;
-            // Sets the initial color select to the current text color.
-            //MyDialog.Color = textBox1.ForeColor;
-
-            // Update the text box color if the user clicks OK 
             if (MyDialog.ShowDialog() == DialogResult.OK)
             {
                 c = MyDialog.Color;
                 pictureBox1.BackColor = c;
+                p.Color = c;
+                b.Color = c;
             }
         }
 
         private void mapa_MouseEnter(object sender, EventArgs e)
         {
-            mapa.SizeMode = PictureBoxSizeMode.StretchImage;
+            //mapa.SizeMode = PictureBoxSizeMode.StretchImage;
             mapa.Cursor = Cursors.Cross;
         }
 
         private void mapa_MouseLeave(object sender, EventArgs e)
         {
-            mapa.SizeMode = PictureBoxSizeMode.Zoom;
+            //mapa.SizeMode = PictureBoxSizeMode.Zoom;
             mapa.Cursor = Cursors.Default;
         }
 
         private void mapa_Click(object sender, EventArgs e)
         {
-            Point local = this.PointToClient(Cursor.Position);
-            Pen p = new Pen(Color.Red, 10);
-            //Brush brush = new SolidBrush(mapa.BackgroundColor);
+            //Point local = this.PointToClient(Cursor.Position);
+            //Pen p = new Pen(Color.Red, penWidth);
+            ////Brush brush = new SolidBrush(mapa.BackgroundColor);
+            //Graphics gr = mapa.CreateGraphics();
+            ////using (Graphics g = mapa.CreateGraphics())
+            ////{
+            //    gr.DrawEllipse(p, local.X - r + 1, local.Y - r + 1, r, r);
+            //    //mapa.Refresh();
+            //    //p.Dispose();
+            ////}
+        }
 
-            using (Graphics g = mapa.CreateGraphics())
+       public void drawGraph(Graphics gr, Graph g)
+        {
+            mapa.Refresh();
+            Pen pTmp = new Pen(p.Color, penWidth);
+            
+
+            foreach (var v in g.V)
             {
-                g.DrawEllipse(p, local.X - 25, local.Y - 25, 20, 20);
-                mapa.Refresh();
-                p.Dispose();
+                if (v.nr == selectedVertex)
+                {
+                    selPen.Color = v.c;
+                    gr.DrawEllipse(selPen, v.x - r / 2, v.y - r / 2, r, r);
+                }
+                else
+                {
+                    pTmp.Color = v.c;
+                    gr.DrawEllipse(pTmp, v.x - r / 2, v.y - r / 2, r, r);
+                }
+                
+                //bTmp.Color = v.c;
+                SolidBrush bTmp = new SolidBrush(v.c);
+                
+                //gr.DrawEllipse(pTmp, v.x - r/2, v.y - r/2, r, r);
+                gr.DrawString((v.nr+1).ToString(), f, bTmp, new Point(v.x, v.y), sf);
+            }
+            
+        }
+
+        private void mapa_MouseDown(object sender, MouseEventArgs e)
+        {
+            Graphics gr = mapa.CreateGraphics();
+            gr.SmoothingMode =
+            System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            if (((MouseEventArgs)e).Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                if (g.Add(e.X, e.Y, g.V.Count, c, r))
+                {
+                    
+                    gr.DrawEllipse(p, e.X - r / 2, e.Y - r / 2, r, r);
+                    gr.DrawString(g.V.Count.ToString(), f, b, new Point(e.X, e.Y), sf);
+                }
+            }
+            else if (((MouseEventArgs)e).Button == System.Windows.Forms.MouseButtons.Right) // select wierzcholka
+            {
+                int t = selectedVertex;
+                selectedVertex = g.getNr(e.X, e.Y, r + 2);
+                if (t != selectedVertex)
+                    drawGraph(gr, g);
+            }
+            else if (((MouseEventArgs)e).Button == System.Windows.Forms.MouseButtons.Middle) // przesuwanie
+            {
+
             }
         }
 
-        private void mapa_Paint(object sender, PaintEventArgs e)
+        private void mapa_Resize(object sender, EventArgs e)
         {
-
+            Graphics gr = mapa.CreateGraphics();
+            drawGraph(gr, g);
         }
     }
 }

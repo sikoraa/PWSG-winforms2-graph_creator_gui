@@ -43,6 +43,8 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.kolorB = new System.Windows.Forms.Button();
+            this.removeB = new System.Windows.Forms.Button();
+            this.clearB = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -60,6 +62,7 @@
             // 
             // splitContainer1
             // 
+            this.splitContainer1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.IsSplitterFixed = true;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
@@ -72,6 +75,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel1);
             this.splitContainer1.Size = new System.Drawing.Size(784, 562);
             this.splitContainer1.SplitterDistance = 640;
@@ -87,12 +91,13 @@
             this.mapa.Location = new System.Drawing.Point(12, 12);
             this.mapa.Name = "mapa";
             this.mapa.Size = new System.Drawing.Size(611, 538);
+            this.mapa.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.mapa.TabIndex = 0;
             this.mapa.TabStop = false;
-            this.mapa.Click += new System.EventHandler(this.mapa_Click);
-            this.mapa.Paint += new System.Windows.Forms.PaintEventHandler(this.mapa_Paint);
+            this.mapa.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mapa_MouseDown);
             this.mapa.MouseEnter += new System.EventHandler(this.mapa_MouseEnter);
             this.mapa.MouseLeave += new System.EventHandler(this.mapa_MouseLeave);
+            this.mapa.Resize += new System.EventHandler(this.mapa_Resize);
             // 
             // tableLayoutPanel1
             // 
@@ -115,7 +120,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(140, 562);
             this.tableLayoutPanel1.TabIndex = 0;
-            //this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
             // importBox
             // 
@@ -180,7 +184,6 @@
             this.jezykBox.TabIndex = 0;
             this.jezykBox.TabStop = false;
             this.jezykBox.Text = "Język";
-            this.jezykBox.Enter += new System.EventHandler(this.jezykBox_Enter);
             // 
             // tableLayoutPanel3
             // 
@@ -229,6 +232,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.edycjaBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.edycjaBox.Controls.Add(this.clearB);
+            this.edycjaBox.Controls.Add(this.removeB);
             this.edycjaBox.Controls.Add(this.tableLayoutPanel2);
             this.edycjaBox.Location = new System.Drawing.Point(5, 5);
             this.edycjaBox.Name = "edycjaBox";
@@ -236,7 +241,6 @@
             this.edycjaBox.TabIndex = 0;
             this.edycjaBox.TabStop = false;
             this.edycjaBox.Text = "Edycja";
-            //this.edycjaBox.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
             // tableLayoutPanel2
             // 
@@ -245,24 +249,24 @@
             this.tableLayoutPanel2.AutoSize = true;
             this.tableLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.42857F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.57143F));
             this.tableLayoutPanel2.Controls.Add(this.pictureBox1, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.kolorB, 0, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(10, 23);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 23);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(115, 29);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(126, 29);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.Desktop;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(95, 3);
+            this.pictureBox1.Location = new System.Drawing.Point(94, 3);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(17, 23);
+            this.pictureBox1.Size = new System.Drawing.Size(31, 23);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -274,16 +278,41 @@
             this.kolorB.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.kolorB.Location = new System.Drawing.Point(3, 3);
             this.kolorB.Name = "kolorB";
-            this.kolorB.Size = new System.Drawing.Size(86, 23);
+            this.kolorB.Size = new System.Drawing.Size(85, 23);
             this.kolorB.TabIndex = 0;
             this.kolorB.Text = "Kolor";
             this.kolorB.UseVisualStyleBackColor = true;
             this.kolorB.Click += new System.EventHandler(this.kolorB_Click);
             // 
+            // removeB
+            // 
+            this.removeB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.removeB.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.removeB.Location = new System.Drawing.Point(3, 59);
+            this.removeB.Name = "removeB";
+            this.removeB.Size = new System.Drawing.Size(123, 23);
+            this.removeB.TabIndex = 1;
+            this.removeB.Text = "Usuń wierzchołek";
+            this.removeB.UseVisualStyleBackColor = true;
+            // 
+            // clearB
+            // 
+            this.clearB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.clearB.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.clearB.Location = new System.Drawing.Point(3, 89);
+            this.clearB.Name = "clearB";
+            this.clearB.Size = new System.Drawing.Size(123, 23);
+            this.clearB.TabIndex = 2;
+            this.clearB.Text = "Wyczyść graf";
+            this.clearB.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.splitContainer1);
             this.MinimumSize = new System.Drawing.Size(800, 600);
@@ -291,6 +320,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edytor Grafów1";
             this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -328,6 +358,8 @@
         private System.Windows.Forms.GroupBox jezykBox;
         private System.Windows.Forms.GroupBox importBox;
         private System.Windows.Forms.PictureBox mapa;
+        private System.Windows.Forms.Button clearB;
+        private System.Windows.Forms.Button removeB;
     }
 }
 
