@@ -94,6 +94,7 @@
             this.mapa.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.mapa.TabIndex = 0;
             this.mapa.TabStop = false;
+            this.mapa.Paint += new System.Windows.Forms.PaintEventHandler(this.mapa_Paint);
             this.mapa.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mapa_MouseDown);
             this.mapa.MouseEnter += new System.EventHandler(this.mapa_MouseEnter);
             this.mapa.MouseLeave += new System.EventHandler(this.mapa_MouseLeave);
@@ -289,12 +290,14 @@
             this.removeB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.removeB.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.removeB.Enabled = false;
             this.removeB.Location = new System.Drawing.Point(3, 59);
             this.removeB.Name = "removeB";
             this.removeB.Size = new System.Drawing.Size(123, 23);
             this.removeB.TabIndex = 1;
             this.removeB.Text = "Usuń wierzchołek";
             this.removeB.UseVisualStyleBackColor = true;
+            this.removeB.Click += new System.EventHandler(this.removeB_Click);
             // 
             // clearB
             // 
@@ -307,6 +310,7 @@
             this.clearB.TabIndex = 2;
             this.clearB.Text = "Wyczyść graf";
             this.clearB.UseVisualStyleBackColor = true;
+            this.clearB.Click += new System.EventHandler(this.clearB_Click);
             // 
             // Form1
             // 

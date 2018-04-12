@@ -44,16 +44,21 @@ namespace WindowsFormsApp2
             return true;
         }
 
+        public void Remove(int nr)
+        {
+            
+            fix(nr);
+        }
+
         public int getNr(int x, int y, int r)
         {
             //bool contains = false;
             foreach (var v in V)
             {
-                if (Math.Pow(x - v.x, 2) + Math.Pow(y - v.y, 2) <= Math.Pow(r,2))
+                if (Math.Pow(x - v.x, 2) + Math.Pow(y - v.y, 2) < Math.Pow(r,2))
                 {
                     return v.nr;
                 }
-
             }
             return -1;
         }

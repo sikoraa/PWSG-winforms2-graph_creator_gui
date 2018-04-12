@@ -18,6 +18,7 @@ namespace WindowsFormsApp2
         int penWidth;
         Pen p;//= new Pen(Color.Black, penWidth);
         Pen selPen;
+        Graphics grr;
 
         SolidBrush b;
         Graph g = new Graph();
@@ -42,15 +43,20 @@ namespace WindowsFormsApp2
             sf = new StringFormat();
             sf.Alignment = StringAlignment.Center;
             sf.LineAlignment = StringAlignment.Center;
+            this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.DoubleBuffer, true);
+            grr = mapa.CreateGraphics();
+            this.SetStyle(
+    ControlStyles.AllPaintingInWmPaint |
+    ControlStyles.UserPaint |
+    ControlStyles.DoubleBuffer,
+    true);
+
+   //         typeof(Panel).InvokeMember("DoubleBuffered",
+   //BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
+   //null, DrawingPanel, new object[] { true });
 
         }
-
-
-
-        
-
-        
 
         private void kolorB_Click(object sender, EventArgs e)
         {
@@ -68,35 +74,23 @@ namespace WindowsFormsApp2
 
         private void mapa_MouseEnter(object sender, EventArgs e)
         {
-            //mapa.SizeMode = PictureBoxSizeMode.StretchImage;
             mapa.Cursor = Cursors.Cross;
         }
 
         private void mapa_MouseLeave(object sender, EventArgs e)
         {
-            //mapa.SizeMode = PictureBoxSizeMode.Zoom;
             mapa.Cursor = Cursors.Default;
         }
-
-        private void mapa_Click(object sender, EventArgs e)
-        {
-            //Point local = this.PointToClient(Cursor.Position);
-            //Pen p = new Pen(Color.Red, penWidth);
-            ////Brush brush = new SolidBrush(mapa.BackgroundColor);
-            //Graphics gr = mapa.CreateGraphics();
-            ////using (Graphics g = mapa.CreateGraphics())
-            ////{
-            //    gr.DrawEllipse(p, local.X - r + 1, local.Y - r + 1, r, r);
-            //    //mapa.Refresh();
-            //    //p.Dispose();
-            ////}
-        }
-
+    
        public void drawGraph(Graphics gr, Graph g)
         {
-            mapa.Refresh();
-            Pen pTmp = new Pen(p.Color, penWidth);
+            //this.SetStyle(ControlStyles.DoubleBuffer, true);
+            //mapa.Refresh();
             
+            Pen pTmp = new Pen(p.Color, penWidth);
+            Bitmap bmp = new Bitmap(mapa.Image);
+            //Graphics rg = Graphics.FromImage(bmp);
+            //var rg = mapa.CreateGraphics();
 
             foreach (var v in g.V)
             {
@@ -104,32 +98,31 @@ namespace WindowsFormsApp2
                 {
                     selPen.Color = v.c;
                     gr.DrawEllipse(selPen, v.x - r / 2, v.y - r / 2, r, r);
+                    //rg.DrawEllipse(selPen, v.x - r / 2, v.y - r / 2, r, r);
+
                 }
                 else
                 {
                     pTmp.Color = v.c;
                     gr.DrawEllipse(pTmp, v.x - r / 2, v.y - r / 2, r, r);
                 }
-                
-                //bTmp.Color = v.c;
                 SolidBrush bTmp = new SolidBrush(v.c);
-                
-                //gr.DrawEllipse(pTmp, v.x - r/2, v.y - r/2, r, r);
                 gr.DrawString((v.nr+1).ToString(), f, bTmp, new Point(v.x, v.y), sf);
+                bTmp.Dispose();
             }
-            
+            pTmp.Dispose();
+            //bmp.Dispose();
         }
 
         private void mapa_MouseDown(object sender, MouseEventArgs e)
         {
             Graphics gr = mapa.CreateGraphics();
-            gr.SmoothingMode =
-            System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            //gr.SmoothingMode =
+            //System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             if (((MouseEventArgs)e).Button == System.Windows.Forms.MouseButtons.Left)
             {
                 if (g.Add(e.X, e.Y, g.V.Count, c, r))
-                {
-                    
+                {                   
                     gr.DrawEllipse(p, e.X - r / 2, e.Y - r / 2, r, r);
                     gr.DrawString(g.V.Count.ToString(), f, b, new Point(e.X, e.Y), sf);
                 }
@@ -137,20 +130,70 @@ namespace WindowsFormsApp2
             else if (((MouseEventArgs)e).Button == System.Windows.Forms.MouseButtons.Right) // select wierzcholka
             {
                 int t = selectedVertex;
-                selectedVertex = g.getNr(e.X, e.Y, r + 2);
+                selectedVertex = g.getNr(e.X, e.Y, r-12);
+                if (selectedVertex != -1)
+                    removeB.Enabled = true;
+                else
+                    removeB.Enabled = false;
                 if (t != selectedVertex)
-                    drawGraph(gr, g);
+                    //mapa.Invalidate();
+                     drawGraph(gr, g);
+                
             }
             else if (((MouseEventArgs)e).Button == System.Windows.Forms.MouseButtons.Middle) // przesuwanie
             {
 
             }
+            gr.Dispose();
         }
 
         private void mapa_Resize(object sender, EventArgs e)
         {
             Graphics gr = mapa.CreateGraphics();
             drawGraph(gr, g);
+            gr.Dispose();
+
+            //var image = new Bitmap(mapa.ClientRectangle.Width, mapa.ClientRectangle.Height);
+            //mapa.Image = image;
+        }
+
+        private void clearB_Click(object sender, EventArgs e)
+        {
+            g.Clear();
+            Graphics gr = mapa.CreateGraphics();
+            drawGraph(gr, g);
+            gr.Dispose();
+        }
+
+        private void removeB_Click(object sender, EventArgs e)
+        {
+            if (selectedVertex != -1)
+            {
+                Graphics gr = mapa.CreateGraphics();
+                g.Remove(selectedVertex);
+                selectedVertex = -1;
+                drawGraph(gr, g);
+                gr.Dispose();
+            }
+        }
+
+        private void mapa_Paint(object sender, PaintEventArgs e)
+        {
+            //Graphics gr = mapa.CreateGraphics();
+            //drawGraph(grr, g);
+            
+            
+            //Graphics gr = mapa.CreateGraphics();
+            ////var img =
+            //using (Bitmap bitmap = new Bitmap(mapa.Width, mapa.Height))
+            //{
+            //    using (Graphics gx = Graphics.FromImage(bitmap))
+            //    {
+            //        Graphics g = mapa.CreateGraphics();
+            //        e.Graphics.DrawImage(bitmap, 0, 0);
+            //    }
+            //}
+            //drawGraph(gr, g);
         }
     }
 }
