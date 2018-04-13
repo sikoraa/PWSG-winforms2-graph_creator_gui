@@ -100,6 +100,7 @@
             this.mapa.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mapa_MouseDown);
             this.mapa.MouseEnter += new System.EventHandler(this.mapa_MouseEnter);
             this.mapa.MouseLeave += new System.EventHandler(this.mapa_MouseLeave);
+            this.mapa.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             this.mapa.Resize += new System.EventHandler(this.mapa_Resize);
             // 
             // tableLayoutPanel1
@@ -123,6 +124,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(140, 562);
             this.tableLayoutPanel1.TabIndex = 0;
+            this.tableLayoutPanel1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             // 
             // importBox
             // 
@@ -187,6 +189,7 @@
             this.jezykBox.TabIndex = 0;
             this.jezykBox.TabStop = false;
             this.jezykBox.Text = "Język";
+            this.jezykBox.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             // 
             // tableLayoutPanel3
             // 
@@ -244,6 +247,7 @@
             this.edycjaBox.TabIndex = 0;
             this.edycjaBox.TabStop = false;
             this.edycjaBox.Text = "Edycja";
+            this.edycjaBox.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             // 
             // clearB
             // 
@@ -321,10 +325,12 @@
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.splitContainer1);
+            this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edytor Grafów1";
+            this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);

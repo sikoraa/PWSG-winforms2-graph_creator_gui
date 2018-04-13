@@ -18,7 +18,15 @@ namespace WindowsFormsApp2
             V = new List<(int, int, int, Color)>();
             E = new List<(int, int)>();
         }
-
+        public Point getPoint(int nr)
+        {
+            for(int i = 0; i < V.Count; ++i)
+            {
+                if (V[i].nr == nr)
+                    return new Point(V[i].x, V[i].y);
+            }
+            return new Point(0,0);
+        }
         public int getIndex(int nr)
         {
             for(int i = 0; i < V.Count; ++i)
@@ -28,6 +36,25 @@ namespace WindowsFormsApp2
             }
             return -1;
         }
+
+        public bool AddEdge(int v1, int v2)
+        {
+
+            if (v1 < v2)
+            {
+                if (!E.Contains((v1, v2)))
+                    E.Add((v1, v2));
+            }
+            else
+            {
+                if (!E.Contains((v2,v1)))
+                    E.Add((v2, v1));
+            }
+
+            return true;
+        }
+
+        //public (int x, int y, int)
 
         public bool Add(int x,int y, int nr,Color c, int r)
         {
