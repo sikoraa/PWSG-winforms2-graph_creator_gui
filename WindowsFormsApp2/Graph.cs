@@ -19,6 +19,16 @@ namespace WindowsFormsApp2
             E = new List<(int, int)>();
         }
 
+        public int getIndex(int nr)
+        {
+            for(int i = 0; i < V.Count; ++i)
+            {
+                if (V[i].nr == nr)
+                    return i;
+            }
+            return -1;
+        }
+
         public bool Add(int x,int y, int nr,Color c, int r)
         {
             bool contains = false;
@@ -36,6 +46,8 @@ namespace WindowsFormsApp2
             V.Add((x, y, nr, c));
             return true;
         }
+
+        
 
         public bool Add(int v1, int v2)
         {

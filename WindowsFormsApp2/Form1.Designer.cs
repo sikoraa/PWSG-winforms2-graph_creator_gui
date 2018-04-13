@@ -40,11 +40,11 @@
             this.angielskiB = new System.Windows.Forms.Button();
             this.polskiB = new System.Windows.Forms.Button();
             this.edycjaBox = new System.Windows.Forms.GroupBox();
+            this.clearB = new System.Windows.Forms.Button();
+            this.removeB = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.kolorB = new System.Windows.Forms.Button();
-            this.removeB = new System.Windows.Forms.Button();
-            this.clearB = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -88,12 +88,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.mapa.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.mapa.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.mapa.Location = new System.Drawing.Point(12, 12);
             this.mapa.Name = "mapa";
             this.mapa.Size = new System.Drawing.Size(611, 538);
             this.mapa.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.mapa.TabIndex = 0;
             this.mapa.TabStop = false;
+            this.mapa.SizeChanged += new System.EventHandler(this.mapa_SizeChanged);
             this.mapa.Paint += new System.Windows.Forms.PaintEventHandler(this.mapa_Paint);
             this.mapa.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mapa_MouseDown);
             this.mapa.MouseEnter += new System.EventHandler(this.mapa_MouseEnter);
@@ -243,6 +245,33 @@
             this.edycjaBox.TabStop = false;
             this.edycjaBox.Text = "Edycja";
             // 
+            // clearB
+            // 
+            this.clearB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.clearB.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.clearB.Location = new System.Drawing.Point(3, 89);
+            this.clearB.Name = "clearB";
+            this.clearB.Size = new System.Drawing.Size(123, 23);
+            this.clearB.TabIndex = 2;
+            this.clearB.Text = "Wyczyść graf";
+            this.clearB.UseVisualStyleBackColor = true;
+            this.clearB.Click += new System.EventHandler(this.clearB_Click);
+            // 
+            // removeB
+            // 
+            this.removeB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.removeB.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.removeB.Enabled = false;
+            this.removeB.Location = new System.Drawing.Point(3, 59);
+            this.removeB.Name = "removeB";
+            this.removeB.Size = new System.Drawing.Size(123, 23);
+            this.removeB.TabIndex = 1;
+            this.removeB.Text = "Usuń wierzchołek";
+            this.removeB.UseVisualStyleBackColor = true;
+            this.removeB.Click += new System.EventHandler(this.removeB_Click);
+            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -265,9 +294,9 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.Desktop;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(94, 3);
+            this.pictureBox1.Location = new System.Drawing.Point(93, 3);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(31, 23);
+            this.pictureBox1.Size = new System.Drawing.Size(30, 23);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -279,38 +308,11 @@
             this.kolorB.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.kolorB.Location = new System.Drawing.Point(3, 3);
             this.kolorB.Name = "kolorB";
-            this.kolorB.Size = new System.Drawing.Size(85, 23);
+            this.kolorB.Size = new System.Drawing.Size(84, 23);
             this.kolorB.TabIndex = 0;
             this.kolorB.Text = "Kolor";
             this.kolorB.UseVisualStyleBackColor = true;
             this.kolorB.Click += new System.EventHandler(this.kolorB_Click);
-            // 
-            // removeB
-            // 
-            this.removeB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.removeB.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.removeB.Enabled = false;
-            this.removeB.Location = new System.Drawing.Point(3, 59);
-            this.removeB.Name = "removeB";
-            this.removeB.Size = new System.Drawing.Size(123, 23);
-            this.removeB.TabIndex = 1;
-            this.removeB.Text = "Usuń wierzchołek";
-            this.removeB.UseVisualStyleBackColor = true;
-            this.removeB.Click += new System.EventHandler(this.removeB_Click);
-            // 
-            // clearB
-            // 
-            this.clearB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.clearB.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.clearB.Location = new System.Drawing.Point(3, 89);
-            this.clearB.Name = "clearB";
-            this.clearB.Size = new System.Drawing.Size(123, 23);
-            this.clearB.TabIndex = 2;
-            this.clearB.Text = "Wyczyść graf";
-            this.clearB.UseVisualStyleBackColor = true;
-            this.clearB.Click += new System.EventHandler(this.clearB_Click);
             // 
             // Form1
             // 
