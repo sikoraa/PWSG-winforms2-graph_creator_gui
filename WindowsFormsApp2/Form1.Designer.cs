@@ -89,6 +89,8 @@
             this.mapa.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mapa_MouseDown);
             this.mapa.MouseEnter += new System.EventHandler(this.mapa_MouseEnter);
             this.mapa.MouseLeave += new System.EventHandler(this.mapa_MouseLeave);
+            this.mapa.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mapa_MouseMove);
+            this.mapa.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mapa_MouseUp);
             this.mapa.Resize += new System.EventHandler(this.mapa_Resize);
             // 
             // tableLayoutPanel1

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -47,11 +49,15 @@ namespace WindowsFormsApp2
             {
                 if (!E.Contains((v1, v2)))
                     E.Add((v1, v2));
+                else
+                    E.Remove((v1, v2));
             }
             else
             {
                 if (!E.Contains((v2, v1)))
                     E.Add((v2, v1));
+                else
+                    E.Remove((v2, v1));
             }
 
             return true;
@@ -137,23 +143,33 @@ namespace WindowsFormsApp2
 
         public void Export(string s)
         {
-            using (var writer = new System.IO.StreamWriter(s))
-            {
-                var serializer = new XmlSerializer(this.GetType());
-                serializer.Serialize(writer, this);
-                writer.Flush();
-            }
+            //using (var writer = new System.IO.StreamWriter(s))
+            //{
+            //    var serializer = new XmlSerializer(this.GetType());
+            //    serializer.Serialize(writer, this);
+            //    writer.Flush();
+            //}
+
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream(s, FileMode.Create, FileAccess.Write, FileShare.None);
+            formatter.Serialize(stream, this);
+            stream.Close();
         }
 
         public static Graph Import(string s)
         {
 
-            using (var stream = System.IO.File.OpenRead(s))
-            {
-                
-                var serializer = new XmlSerializer(typeof(Graph));
-                return serializer.Deserialize(stream) as Graph;
-            }
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream(s, FileMode.Open, FileAccess.Read, FileShare.Read);
+            Graph g = (Graph)formatter.Deserialize(stream);
+            stream.Close();
+            return g;
+            //using (var stream = System.IO.File.OpenRead(s))
+            //{
+
+            //    var serializer = new XmlSerializer(typeof(Graph));
+            //    return serializer.Deserialize(stream) as Graph;
+            //}
         }
     }
 }

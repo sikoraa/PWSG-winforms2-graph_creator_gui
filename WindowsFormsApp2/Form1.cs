@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,17 +20,26 @@ namespace WindowsFormsApp2
         Color c;
         //Graphics gr;
         int r = 28;
+        bool moving = false;
+        int movingi = -1;
+        Stopwatch s1 = new Stopwatch();
+        int mousex, mousey;
+
         int penWidth;
         Pen p;//= new Pen(Color.Black, penWidth);
         Pen selPen;
         Pen edgePen;
-
+        string[] cultures = {  "pl-PL","en-GB" };
+        int cultureindex = 0;
+        CultureInfo originalCulture = Thread.CurrentThread.CurrentCulture;
         SolidBrush b;
         Graph g = new Graph();
         int selectedVertex = -1;
 
         Font f;
         StringFormat sf;
+
+        
 
         public Form1()
         {
@@ -46,10 +58,9 @@ namespace WindowsFormsApp2
             sf = new StringFormat();
             sf.Alignment = StringAlignment.Center;
             sf.LineAlignment = StringAlignment.Center;
-            //this.DoubleBuffered = true;
-            //this.SetStyle(ControlStyles.DoubleBuffer, true);
-            
         }
+
+        
 
         private void kolorB_Click(object sender, EventArgs e)
         {
@@ -71,6 +82,7 @@ namespace WindowsFormsApp2
             }
         }
 
+
         private void mapa_MouseEnter(object sender, EventArgs e)
         {
             mapa.Cursor = Cursors.Cross;
@@ -86,50 +98,6 @@ namespace WindowsFormsApp2
             return Math.Sqrt(Math.Pow(x2-x1,2) + Math.Pow(y2-y1,2));
         }
 
-        private (Point P1, Point P2) calc(int X1, int Y1, int X2, int Y2, int r)
-        {
-            // wyznaczenie wzoru funkcji, przez ktorej lezy S1, S2, s1, s2
-            double a_lin = (Y2 - Y1) / (X2 - X1);
-            double b_lin = Y1 - a_lin * X1;
-            //
-            double a_kw = (a_lin + 1);
-            double b_kw = (-2 * X1 + 2 * a_lin * b_lin - 2 * a_lin * Y1);
-            double c_kw = Math.Pow(X1, 2) - Math.Pow(r, 2) + Math.Pow(b_lin, 2) - 2 * b_lin * Y1 + Math.Pow(Y1, 2) ;
-            double delta = Math.Pow(b_kw, 2) - 4 * a_kw * c_kw;
-            double sq_delta = Math.Sqrt(delta);
-            //
-            double __x1 = (-b_kw - Math.Sign(b_kw) * sq_delta)/2/a_kw;//(-b_kw - sq_delta) / 2 / a_kw;
-            double __x2 = c_kw / a_kw / __x1;//(-b_kw + sq_delta)/2/a_kw;
-            double __y1 = a_lin * __x1 + b_lin;
-            double __y2 = a_lin * __x2 + b_lin; // 2 punkty przeciecia dla okregu O1
-            // bierzemy punkt lezacy blizej O2 i zapisujemy go jako __x1, __y1
-            if (dist(__x2, __y2, X2, Y2) < dist(__x1, __y1, X2, Y2))
-            {
-                __x1 = __x2;
-                __y1 = __y2;
-            }
-            Point P1 = new Point((int)__x1, (int)__y1);
-            a_kw = (a_lin + 1);
-             b_kw = (-2 * X2 + 2 * a_lin * b_lin - 2 * a_lin * Y2);
-             c_kw = Math.Pow(X2, 2) - Math.Pow(r, 2) + Math.Pow(b_lin, 2) - 2 * b_lin * Y2 + Math.Pow(Y2, 2) ;
-             delta = Math.Pow(b_kw, 2) - 4 * a_kw * c_kw;
-             sq_delta = Math.Sqrt(delta);
-            ////
-            __x1 = (-b_kw - Math.Sign(b_kw) * sq_delta)/2/a_kw;
-            __x2 = c_kw / a_kw / __x1;
-//__x1 = -b_kw - Math.Sign(b_kw) * sq_delta / 2 / a_kw;//(-b_kw - sq_delta) / 2 / a_kw;
-             //__x2 = c_kw / a_kw / __x1;//(-b_kw + sq_delta)/2/a_kw;
-
-             __y1 = a_lin * __x1 + b_lin;
-             __y2 = a_lin * __x2 + b_lin; // 2 punkty przeciecia dla okregu O1
-            if (dist(__x2, __y2, X1, Y1) < dist(__x1, __y1, X1, Y1))
-            {
-                __x1 = __x2;
-                __y1 = __y2;
-            }
-            Point P2 = new Point((int)__x1, (int)__x2);
-            return (P1, P2);
-        }
 
         private void mapa_MouseDown(object sender, MouseEventArgs e)
         {
@@ -164,7 +132,17 @@ namespace WindowsFormsApp2
            }
             else if (((MouseEventArgs)e).Button == System.Windows.Forms.MouseButtons.Middle) // przesuwanie
             {
-
+                if (selectedVertex != -1)
+                {
+                    if (!moving)
+                    {
+                        mousex = e.X;
+                        mousey = e.Y;
+                        s1.Start();
+                        moving = true;
+                        movingi = selectedVertex;
+                    }
+                }
             }
         }
 
@@ -174,32 +152,23 @@ namespace WindowsFormsApp2
         {
             g.Clear();
             selectedVertex = -1;
-            //Graphics gr = mapa.CreateGraphics();
-            //mapa.Refresh();
-            //mapa.Invalidate();
             drawGraph(g);
-            //gr.Dispose();
         }
 
         private void removeB_Click(object sender, EventArgs e)
         {
             if (selectedVertex != -1)
             {
-                //Graphics gr = mapa.CreateGraphics();
+                s1.Stop();
+                moving = false;
                 g.Remove(selectedVertex);
                 selectedVertex = -1;
-                //mapa.Invalidate();
                 drawGraph(g);
-                //gr.Dispose();
             }
         }
 
         private void mapa_Paint(object sender, PaintEventArgs e)
-        {
-
-            //drawGraph(g);
-            
-        }
+        { }
 
         public void drawGraph(Graph g)
         {
@@ -221,7 +190,6 @@ namespace WindowsFormsApp2
             {
                 Point p1 = g.getPoint(e.v1);
                 Point p2 = g.getPoint(e.v2);
-                //(Point P1, Point P2) h = calc(p1.X, p1.Y, p2.X, p2.Y, r);
                 rg.DrawLine(edgePen, p1, p2);
             }
             foreach (var v in g.V)
@@ -242,16 +210,7 @@ namespace WindowsFormsApp2
                 SolidBrush bTmp = new SolidBrush(v.c);
                     rg.DrawString((v.nr + 1).ToString(), f, bTmp, new Point(v.x, v.y), sf);
                     bTmp.Dispose();
-                
-                //bTmp.Color = v.c;
-                //rg.DrawString((v.nr + 1).ToString(), f, bTmp, new Point(v.x, v.y), sf);
-                //gr.DrawString((v.nr + 1).ToString(), f, bTmp, new Point(v.x, v.y), sf);
-                // bTmp.Dispose();
-            }
-
-            
-            //mapa.Image = null;
-            //mapa.Refresh();
+             }
             if (mapa.Image != null)
                 mapa.Image.Dispose();
             mapa.Image = (Image)bmp.Clone();
@@ -284,6 +243,8 @@ namespace WindowsFormsApp2
             
             if (e.KeyCode == Keys.Delete && selectedVertex != -1)
             {
+                s1.Stop();
+                moving = false;
                 g.fix(selectedVertex);
                 selectedVertex = -1;
                 drawGraph(g);
@@ -348,9 +309,11 @@ namespace WindowsFormsApp2
                         using (myStream)
                         {
                             myStream.Close();
-                            this.Text = "lol";
+                            //this.Text = "lol";
                             g = Graph.Import(openFileDialog1.FileName);
+                            selectedVertex = -1;
                             drawGraph(g);
+                            MessageBox.Show("Graf wczytano pomyślniea");
                         }
                         myStream.Close();
                     }
@@ -371,6 +334,44 @@ namespace WindowsFormsApp2
         private void angielskiB_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void mapa_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (moving && s1.ElapsedMilliseconds > 10)
+            {
+                int x = e.X;
+                int y = e.Y;
+                int dx = e.X - mousex;
+                int dy = e.Y - mousey;
+                //g.V[movingi] = (x, y, g.V[movingi].nr, g.V[movingi].c);
+                g.V[movingi] = (g.V[movingi].x+dx, g.V[movingi].y + dy, g.V[movingi].nr, g.V[movingi].c);
+                drawGraph(g);
+                mousex = e.X;
+                mousey = e.Y;
+                s1.Reset();
+                s1.Start();
+                //s1.Stop();
+                //s1.Start();
+            }
+        }
+
+        private void mapa_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (((MouseEventArgs)e).Button == System.Windows.Forms.MouseButtons.Middle && moving)
+            {
+                moving = false;
+                int x = g.V[movingi].x, y = g.V[movingi].y;
+                if (g.V[movingi].x < 0) x = 0;
+                else if (g.V[movingi].x > mapa.Width) x = mapa.Width;
+                if (g.V[movingi].y < 0) y = 0;
+                else if (g.V[movingi].y > mapa.Height) y = mapa.Height;
+                g.V[movingi] = (x, y, g.V[movingi].nr, g.V[movingi].c);
+                movingi = -1;
+                s1.Stop();
+                drawGraph(g);
+                
+            }
         }
     }
 }
