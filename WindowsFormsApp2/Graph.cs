@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace WindowsFormsApp2
 {
@@ -20,16 +23,16 @@ namespace WindowsFormsApp2
         }
         public Point getPoint(int nr)
         {
-            for(int i = 0; i < V.Count; ++i)
+            for (int i = 0; i < V.Count; ++i)
             {
                 if (V[i].nr == nr)
                     return new Point(V[i].x, V[i].y);
             }
-            return new Point(0,0);
+            return new Point(0, 0);
         }
         public int getIndex(int nr)
         {
-            for(int i = 0; i < V.Count; ++i)
+            for (int i = 0; i < V.Count; ++i)
             {
                 if (V[i].nr == nr)
                     return i;
@@ -47,7 +50,7 @@ namespace WindowsFormsApp2
             }
             else
             {
-                if (!E.Contains((v2,v1)))
+                if (!E.Contains((v2, v1)))
                     E.Add((v2, v1));
             }
 
@@ -56,12 +59,12 @@ namespace WindowsFormsApp2
 
         //public (int x, int y, int)
 
-        public bool Add(int x,int y, int nr,Color c, int r)
+        public bool Add(int x, int y, int nr, Color c, int r)
         {
             bool contains = false;
-            foreach( var v in V)
+            foreach (var v in V)
             {
-                if ( Math.Pow(x - v.x,2) + Math.Pow(y - v.y, 2) <= Math.Pow(r,2))
+                if (Math.Pow(x - v.x, 2) + Math.Pow(y - v.y, 2) <= Math.Pow(r, 2))
                 {
                     contains = true; break;
                 }
@@ -69,12 +72,12 @@ namespace WindowsFormsApp2
             }
             if (contains) return false;
             //if (V.Contains((x, y, nr)))
-              //  return false;
+            //  return false;
             V.Add((x, y, nr, c));
             return true;
         }
 
-        
+
 
         public bool Add(int v1, int v2)
         {
@@ -85,7 +88,7 @@ namespace WindowsFormsApp2
 
         public void Remove(int nr)
         {
-            
+
             fix(nr);
         }
 
@@ -94,7 +97,7 @@ namespace WindowsFormsApp2
             //bool contains = false;
             foreach (var v in V)
             {
-                if (Math.Pow(x - v.x, 2) + Math.Pow(y - v.y, 2) < Math.Pow(r,2))
+                if (Math.Pow(x - v.x, 2) + Math.Pow(y - v.y, 2) < Math.Pow(r, 2))
                 {
                     return v.nr;
                 }
@@ -112,7 +115,7 @@ namespace WindowsFormsApp2
                 if (V[i].nr > nr) V[i] = (V[i].x, V[i].y, V[i].nr - 1, V[i].c);
             }
             V.RemoveAt(indexToRemove); // usuniecie wierzcholka
-            for(int i = 0; i < E.Count; ++i) // przenumerowanie krawedzi + zapamietanie krawedzi do wyrzucenia
+            for (int i = 0; i < E.Count; ++i) // przenumerowanie krawedzi + zapamietanie krawedzi do wyrzucenia
             {
                 if (E[i].v1 == nr || E[i].v2 == nr) ind.Add(i);
                 if (E[i].v1 > nr && E[i].v2 > nr) E[i] = (E[i].v1 - 1, E[i].v2 - 1);
@@ -123,7 +126,7 @@ namespace WindowsFormsApp2
             {
                 E.RemoveAt(ind[i] - i);
             }
-                
+
         }
 
         public void Clear()
@@ -132,5 +135,25 @@ namespace WindowsFormsApp2
             E.Clear();
         }
 
+        public void Export(string s)
+        {
+            using (var writer = new System.IO.StreamWriter(s))
+            {
+                var serializer = new XmlSerializer(this.GetType());
+                serializer.Serialize(writer, this);
+                writer.Flush();
+            }
+        }
+
+        public static Graph Import(string s)
+        {
+
+            using (var stream = System.IO.File.OpenRead(s))
+            {
+                
+                var serializer = new XmlSerializer(typeof(Graph));
+                return serializer.Deserialize(stream) as Graph;
+            }
+        }
     }
 }

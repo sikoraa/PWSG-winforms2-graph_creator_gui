@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -251,8 +252,8 @@ namespace WindowsFormsApp2
             
             //mapa.Image = null;
             //mapa.Refresh();
-            //if (mapa.Image != null)
-            //mapa.Image.Dispose();
+            if (mapa.Image != null)
+                mapa.Image.Dispose();
             mapa.Image = (Image)bmp.Clone();
             
 
@@ -276,13 +277,100 @@ namespace WindowsFormsApp2
             //mapa.Invalidate();
         }
 
-        private void Form1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            
             if (e.KeyCode == Keys.Delete && selectedVertex != -1)
             {
                 g.fix(selectedVertex);
+                selectedVertex = -1;
                 drawGraph(g);
             }
+            
+        }
+
+        private void zapiszB_Click(object sender, EventArgs e)
+        {
+            Stream myStream = null;
+
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+
+            saveFileDialog1.InitialDirectory = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
+            saveFileDialog1.Filter = "Graph files (*.graph)|*.graph";
+            saveFileDialog1.FilterIndex = 1;
+            saveFileDialog1.RestoreDirectory = true;
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    if ((myStream = saveFileDialog1.OpenFile()) != null)
+                    {
+                        {
+                            myStream.Close();
+                            g.Export(saveFileDialog1.FileName);
+
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: Could not save file to disk. Original error: " + ex.Message);
+                }
+            }
+        }
+
+        private void wczytajB_Click(object sender, EventArgs e)
+        {
+
+            Stream myStream = null;
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.InitialDirectory = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
+            openFileDialog1.Filter = "Graph files (*.graph)|*.graph";
+            openFileDialog1.FilterIndex = 1;
+            openFileDialog1.RestoreDirectory = true;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    if ((myStream = openFileDialog1.OpenFile()) != null)
+                    {
+                        string ext = Path.GetExtension(openFileDialog1.FileName);
+                        if (ext != ".graph")
+                        {
+                            MessageBox.Show("Error: Opened file doesn't have .graph extension.");
+                            return;
+
+                        }
+                        using (myStream)
+                        {
+                            myStream.Close();
+                            this.Text = "lol";
+                            g = Graph.Import(openFileDialog1.FileName);
+                            drawGraph(g);
+                        }
+                        myStream.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+                }
+
+            }
+        }
+
+        private void polskiB_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void angielskiB_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
