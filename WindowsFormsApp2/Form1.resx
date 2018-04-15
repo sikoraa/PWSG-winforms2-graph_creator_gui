@@ -142,7 +142,7 @@
     <value>611, 538</value>
   </data>
   <data name="mapa.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>AutoSize</value>
+    <value>StretchImage</value>
   </data>
   <data name="mapa.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
