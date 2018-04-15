@@ -12,6 +12,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Resources;
+using System.Reflection;
+
+//[assembly: AssemblyCulture("")]
+//[assembly: NeutralResourcesLanguage("pl-PL")]
 
 namespace WindowsFormsApp2
 {
@@ -24,15 +29,25 @@ namespace WindowsFormsApp2
         int movingi = -1;
         Stopwatch s1 = new Stopwatch();
         int mousex, mousey;
-
+        string graphLoaded ="";
+        string graphLoadFailed = "";
+        string graphSaved = "";
         int penWidth;
         Pen p;//= new Pen(Color.Black, penWidth);
         Pen selPen;
         Pen edgePen;
-        string[] cultures = {  "pl-PL","en-GB" };
+
+
+        string[] cultureNames = {  "pl-PL", "en-GB" };
         int cultureindex = 0;
-        CultureInfo originalCulture = Thread.CurrentThread.CurrentCulture;
-        SolidBrush b;
+        //CultureInfo originalCulture = Thread.CurrentThread.CurrentCulture;
+        ResourceManager rm;//= new ResourceManager("GraphEditor", typeof(Form1).Assembly);
+        Assembly assembly;
+        //ResourceManager resman;
+        
+
+
+    SolidBrush b;
         Graph g = new Graph();
         int selectedVertex = -1;
 
@@ -58,9 +73,31 @@ namespace WindowsFormsApp2
             sf = new StringFormat();
             sf.Alignment = StringAlignment.Center;
             sf.LineAlignment = StringAlignment.Center;
+
+            setCulture("pl-PL");
         }
 
-        
+        public bool setCulture(string s)
+        {
+            CultureInfo ci = new CultureInfo(s);
+            ResourceManager rm = new ResourceManager("WindowsFormsApp2.lang." + s, typeof(Form1).Assembly);
+            this.Text = rm.GetString("Title");
+            clearB.Text = rm.GetString("BtnClearGraphText");
+            kolorB.Text = rm.GetString("BtnColorChoiceText");
+            removeB.Text = rm.GetString("BtnDeleteVertexText");
+            angielskiB.Text = rm.GetString("BtnLangEnglishText");
+            polskiB.Text = rm.GetString("BtnLangPolishText");
+            wczytajB.Text = rm.GetString("BtnLoadText");
+            zapiszB.Text = rm.GetString("BtnSaveText");
+            importBox.Text = rm.GetString("groupBox1Text");
+            edycjaBox.Text = rm.GetString("groupBox2Text");
+            jezykBox.Text = rm.GetString("groupBox3Text");
+            graphLoaded = rm.GetString("loadedText");
+            graphLoadFailed = rm.GetString("loadFailedText");
+            graphSaved = rm.GetString("savedText");
+            return true;
+
+        }
 
         private void kolorB_Click(object sender, EventArgs e)
         {
@@ -122,7 +159,19 @@ namespace WindowsFormsApp2
             else if (((MouseEventArgs)e).Button == System.Windows.Forms.MouseButtons.Right) // select wierzcholka
             {
                 int t = selectedVertex;
-                selectedVertex = g.getNr(e.X, e.Y, r-12);
+                double min = double.MaxValue;
+                selectedVertex = -1;
+                for (int i = 0; i < g.V.Count; ++i)
+                {
+                    double _dist = dist(e.X, e.Y, g.V[i].x, g.V[i].y);
+                    if (_dist < r + 3 && _dist < min)
+                    {
+                        min = _dist;
+                        selectedVertex = g.V[i].nr;
+                    }
+
+                }
+                //selectedVertex = g.getNr(e.X, e.Y, r); //r-12
                 if (selectedVertex != -1)
                     removeB.Enabled = true;
                 else
@@ -233,7 +282,6 @@ namespace WindowsFormsApp2
         {
             
             drawGraph(g);
-            //mapa.Invalidate();
         }
 
         
@@ -270,15 +318,21 @@ namespace WindowsFormsApp2
                     if ((myStream = saveFileDialog1.OpenFile()) != null)
                     {
                         {
+
                             myStream.Close();
                             g.Export(saveFileDialog1.FileName);
-
+                            MessageBox.Show(graphSaved);
+                            //myStream.Close();
+                            
                         }
                     }
+                    myStream.Close();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error: Could not save file to disk. Original error: " + ex.Message);
+                    ;
+                    //MessageBox.Show(Error)
+                    //MessageBox.Show("Error: Could not save file to disk. Original error: " + ex.Message);
                 }
             }
         }
@@ -302,25 +356,31 @@ namespace WindowsFormsApp2
                         string ext = Path.GetExtension(openFileDialog1.FileName);
                         if (ext != ".graph")
                         {
-                            MessageBox.Show("Error: Opened file doesn't have .graph extension.");
+                            MessageBox.Show(graphLoadFailed);
+                            //MessageBox.Show("Error: Opened file doesn't have .graph extension.");
                             return;
 
                         }
                         using (myStream)
                         {
-                            myStream.Close();
+
                             //this.Text = "lol";
+                            //openFileDialog1.
                             g = Graph.Import(openFileDialog1.FileName);
                             selectedVertex = -1;
                             drawGraph(g);
-                            MessageBox.Show("Graf wczytano pomyślniea");
+                            //myStream.Close();
+                            MessageBox.Show(graphLoaded);
                         }
                         myStream.Close();
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+                    MessageBox.Show(graphLoadFailed);
+                    //MessageBox.Show("ex");
+
+                    //MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
                 }
 
             }
@@ -328,11 +388,13 @@ namespace WindowsFormsApp2
 
         private void polskiB_Click(object sender, EventArgs e)
         {
+            setCulture("pl-PL");
 
         }
 
         private void angielskiB_Click(object sender, EventArgs e)
         {
+            setCulture("en-GB");
 
         }
 

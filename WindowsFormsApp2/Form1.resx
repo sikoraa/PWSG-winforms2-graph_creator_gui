@@ -208,7 +208,7 @@
     <value>1</value>
   </data>
   <data name="wczytajB.Text" xml:space="preserve">
-    <value>Wczytaj</value>
+    <value>load</value>
   </data>
   <data name="&gt;&gt;wczytajB.Name" xml:space="preserve">
     <value>wczytajB</value>
@@ -238,7 +238,7 @@
     <value>0</value>
   </data>
   <data name="zapiszB.Text" xml:space="preserve">
-    <value>Zapisz</value>
+    <value>save</value>
   </data>
   <data name="&gt;&gt;zapiszB.Name" xml:space="preserve">
     <value>zapiszB</value>
@@ -295,7 +295,7 @@
     <value>1</value>
   </data>
   <data name="importBox.Text" xml:space="preserve">
-    <value>Import/Eksport</value>
+    <value>imp/exp</value>
   </data>
   <data name="&gt;&gt;importBox.Name" xml:space="preserve">
     <value>importBox</value>
@@ -337,7 +337,7 @@
     <value>1</value>
   </data>
   <data name="angielskiB.Text" xml:space="preserve">
-    <value>Angielski</value>
+    <value>eng</value>
   </data>
   <data name="&gt;&gt;angielskiB.Name" xml:space="preserve">
     <value>angielskiB</value>
@@ -367,7 +367,7 @@
     <value>0</value>
   </data>
   <data name="polskiB.Text" xml:space="preserve">
-    <value>Polski</value>
+    <value>pl</value>
   </data>
   <data name="&gt;&gt;polskiB.Name" xml:space="preserve">
     <value>polskiB</value>
@@ -424,7 +424,7 @@
     <value>0</value>
   </data>
   <data name="jezykBox.Text" xml:space="preserve">
-    <value>Język</value>
+    <value>lang</value>
   </data>
   <data name="&gt;&gt;jezykBox.Name" xml:space="preserve">
     <value>jezykBox</value>
@@ -460,7 +460,7 @@
     <value>2</value>
   </data>
   <data name="clearB.Text" xml:space="preserve">
-    <value>Wyczyść graf</value>
+    <value>clear</value>
   </data>
   <data name="&gt;&gt;clearB.Name" xml:space="preserve">
     <value>clearB</value>
@@ -493,7 +493,7 @@
     <value>1</value>
   </data>
   <data name="removeB.Text" xml:space="preserve">
-    <value>Usuń wierzchołek</value>
+    <value>vert del</value>
   </data>
   <data name="&gt;&gt;removeB.Name" xml:space="preserve">
     <value>removeB</value>
@@ -562,7 +562,7 @@
     <value>0</value>
   </data>
   <data name="kolorB.Text" xml:space="preserve">
-    <value>Kolor</value>
+    <value>clr</value>
   </data>
   <data name="&gt;&gt;kolorB.Name" xml:space="preserve">
     <value>kolorB</value>
@@ -613,7 +613,7 @@
     <value>0</value>
   </data>
   <data name="edycjaBox.Text" xml:space="preserve">
-    <value>Edycja</value>
+    <value>edit</value>
   </data>
   <data name="&gt;&gt;edycjaBox.Name" xml:space="preserve">
     <value>edycjaBox</value>
@@ -706,7 +706,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Edytor Grafów1</value>
+    <value>title</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>Form1</value>

@@ -63,7 +63,7 @@ namespace WindowsFormsApp2
             return true;
         }
 
-        //public (int x, int y, int)
+        
 
         public bool Add(int x, int y, int nr, Color c, int r)
         {
@@ -77,20 +77,18 @@ namespace WindowsFormsApp2
 
             }
             if (contains) return false;
-            //if (V.Contains((x, y, nr)))
-            //  return false;
             V.Add((x, y, nr, c));
             return true;
         }
 
 
 
-        public bool Add(int v1, int v2)
-        {
-            if (E.Contains((v1, v2))) return false;
-            E.Add((v1, v2));
-            return true;
-        }
+        //public bool Add(int v1, int v2)
+        //{
+        //    if (E.Contains((v1, v2))) return false;
+        //    E.Add((v1, v2));
+        //    return true;
+        //}
 
         public void Remove(int nr)
         {
@@ -151,7 +149,7 @@ namespace WindowsFormsApp2
             //}
 
             IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(s, FileMode.Create, FileAccess.Write, FileShare.None);
+            Stream stream = new FileStream(s, FileMode.Create, FileAccess.Write);
             formatter.Serialize(stream, this);
             stream.Close();
         }
@@ -161,15 +159,11 @@ namespace WindowsFormsApp2
 
             IFormatter formatter = new BinaryFormatter();
             Stream stream = new FileStream(s, FileMode.Open, FileAccess.Read, FileShare.Read);
+            if (stream.Length == 0) return new Graph();
             Graph g = (Graph)formatter.Deserialize(stream);
             stream.Close();
             return g;
-            //using (var stream = System.IO.File.OpenRead(s))
-            //{
-
-            //    var serializer = new XmlSerializer(typeof(Graph));
-            //    return serializer.Deserialize(stream) as Graph;
-            //}
+            
         }
     }
 }
