@@ -80,21 +80,24 @@ namespace WindowsFormsApp2
         public bool setCulture(string s)
         {
             CultureInfo ci = new CultureInfo(s);
-            ResourceManager rm = new ResourceManager("WindowsFormsApp2.lang." + s, typeof(Form1).Assembly);
-            this.Text = rm.GetString("Title");
-            clearB.Text = rm.GetString("BtnClearGraphText");
-            kolorB.Text = rm.GetString("BtnColorChoiceText");
-            removeB.Text = rm.GetString("BtnDeleteVertexText");
-            angielskiB.Text = rm.GetString("BtnLangEnglishText");
-            polskiB.Text = rm.GetString("BtnLangPolishText");
-            wczytajB.Text = rm.GetString("BtnLoadText");
-            zapiszB.Text = rm.GetString("BtnSaveText");
-            importBox.Text = rm.GetString("groupBox1Text");
-            edycjaBox.Text = rm.GetString("groupBox2Text");
-            jezykBox.Text = rm.GetString("groupBox3Text");
-            graphLoaded = rm.GetString("loadedText");
-            graphLoadFailed = rm.GetString("loadFailedText");
-            graphSaved = rm.GetString("savedText");
+            //ResourceManager rm = new ResourceManager("WindowsFormsApp2.lang." + s, typeof(Form1).Assembly);
+            ResourceManager rm = new ResourceManager("WindowsFormsApp2.GraphEdit", Assembly.GetExecutingAssembly());
+            //ResourceManager rm = new ResourceManager("WindowsFormsApp2.lang." + s, typeof(Form1).Assembly);
+
+            this.Text = rm.GetString("Title",ci);
+            clearB.Text = rm.GetString("BtnClearGraphText", ci);
+            kolorB.Text = rm.GetString("BtnColorChoiceText", ci);
+            removeB.Text = rm.GetString("BtnDeleteVertexText",ci);
+            angielskiB.Text = rm.GetString("BtnLangEnglishText",ci);
+            polskiB.Text = rm.GetString("BtnLangPolishText",ci);
+            wczytajB.Text = rm.GetString("BtnLoadText", ci);
+            zapiszB.Text = rm.GetString("BtnSaveText", ci);
+            importBox.Text = rm.GetString("groupBox1Text", ci);
+            edycjaBox.Text = rm.GetString("groupBox2Text", ci);
+            jezykBox.Text = rm.GetString("groupBox3Text", ci);
+            graphLoaded = rm.GetString("loadedText",ci);
+            graphLoadFailed = rm.GetString("loadFailedText",ci);
+            graphSaved = rm.GetString("savedText",ci);
             return true;
 
         }

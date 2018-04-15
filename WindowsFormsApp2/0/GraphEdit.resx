@@ -118,45 +118,45 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BtnClearGraphText" xml:space="preserve">
-    <value>Clear graph</value>
+    <value>Wyczyść graf</value>
   </data>
   <data name="BtnColorChoiceText" xml:space="preserve">
-    <value>Color</value>
+    <value>Kolor</value>
   </data>
   <data name="BtnDeleteVertexText" xml:space="preserve">
-    <value>Remove vertex</value>
+    <value>Usuń wierzchołek</value>
   </data>
   <data name="BtnLangEnglishText" xml:space="preserve">
-    <value>English</value>
+    <value>Angielski</value>
   </data>
   <data name="BtnLangPolishText" xml:space="preserve">
-    <value>Polish</value>
+    <value>Polski</value>
   </data>
   <data name="BtnLoadText" xml:space="preserve">
-    <value>Open</value>
+    <value>Wczytaj</value>
   </data>
   <data name="BtnSaveText" xml:space="preserve">
-    <value>Save</value>
+    <value>Zapisz</value>
   </data>
   <data name="groupBox1Text" xml:space="preserve">
-    <value>Import/Export</value>
+    <value>Import/Eksport</value>
   </data>
   <data name="groupBox2Text" xml:space="preserve">
-    <value>Edit</value>
+    <value>Edycja</value>
   </data>
   <data name="groupBox3Text" xml:space="preserve">
-    <value>Language</value>
+    <value>Język</value>
   </data>
   <data name="loadedText" xml:space="preserve">
-    <value>Graph loaded successfully.</value>
+    <value>Graf wczytano pomyślnie.</value>
   </data>
   <data name="loadFailedText" xml:space="preserve">
-    <value>File error.</value>
+    <value>Błąd pliku.</value>
   </data>
   <data name="savedText" xml:space="preserve">
-    <value>Graph saved successfully.</value>
+    <value>Graf zapisano pomyślnie.</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Graph editor</value>
+    <value>graph edt</value>
   </data>
 </root>
