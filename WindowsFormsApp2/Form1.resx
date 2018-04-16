@@ -134,9 +134,6 @@
   <data name="&gt;&gt;edycjaBox.Name" xml:space="preserve">
     <value>edycjaBox</value>
   </data>
-  <data name="splitContainer1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="&gt;&gt;angielskiB.Name" xml:space="preserve">
     <value>angielskiB</value>
   </data>
@@ -164,8 +161,8 @@
   <data name="removeB.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 59</value>
   </data>
-  <data name="mapa.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 12</value>
+  <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="wczytajB.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 22</value>
@@ -179,9 +176,6 @@
   <data name="importBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>136, 74</value>
   </data>
-  <data name="removeB.Text" xml:space="preserve">
-    <value>vert del</value>
-  </data>
   <data name="&gt;&gt;removeB.Name" xml:space="preserve">
     <value>removeB</value>
   </data>
@@ -190,9 +184,6 @@
   </data>
   <data name="removeB.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
-  </data>
-  <data name="&gt;&gt;angielskiB.Parent" xml:space="preserve">
-    <value>tableLayoutPanel3</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="clearB.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -210,11 +201,11 @@
   <data name="kolorB.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="removeB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 23</value>
-  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>title</value>
+  </data>
+  <data name="&gt;&gt;polskiB.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="wczytajB.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 30</value>
@@ -231,9 +222,6 @@
   <data name="edycjaBox.Text" xml:space="preserve">
     <value>edit</value>
   </data>
-  <data name="zapiszB.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
   <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
     <value>pictureBox1</value>
   </data>
@@ -242,9 +230,6 @@
   </data>
   <data name="angielskiB.Size" type="System.Drawing.Size, System.Drawing">
     <value>124, 22</value>
-  </data>
-  <data name="&gt;&gt;kolorB.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
@@ -303,8 +288,8 @@
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 55</value>
   </data>
-  <data name="tableLayoutPanel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="removeB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 23</value>
   </data>
   <data name="clearB.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
@@ -321,14 +306,14 @@
   <data name="&gt;&gt;tableLayoutPanel4.Name" xml:space="preserve">
     <value>tableLayoutPanel4</value>
   </data>
+  <data name="&gt;&gt;zapiszB.Parent" xml:space="preserve">
+    <value>tableLayoutPanel4</value>
+  </data>
   <data name="&gt;&gt;tableLayoutPanel4.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="mapa.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
-  </data>
-  <data name="&gt;&gt;angielskiB.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="wczytajB.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -375,9 +360,6 @@
   <data name="&gt;&gt;angielskiB.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="edycjaBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
   <data name="&gt;&gt;removeB.Parent" xml:space="preserve">
     <value>edycjaBox</value>
   </data>
@@ -389,6 +371,9 @@
   </data>
   <data name="&gt;&gt;edycjaBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="importBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 483</value>
@@ -417,8 +402,8 @@
   <data name="&gt;&gt;jezykBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="splitContainer1.IsSplitterFixed" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="importBox" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="jezykBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="edycjaBox" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0" /&gt;&lt;Rows Styles="Percent,100,Absolute,80,Absolute,80" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -453,14 +438,14 @@
   <data name="&gt;&gt;polskiB.Name" xml:space="preserve">
     <value>polskiB</value>
   </data>
+  <data name="tableLayoutPanel3.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="&gt;&gt;kolorB.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>splitContainer1.Panel2</value>
-  </data>
-  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="importBox" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="jezykBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="edycjaBox" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0" /&gt;&lt;Rows Styles="Percent,100,Absolute,80,Absolute,80" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="polskiB.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -476,9 +461,6 @@
   </data>
   <data name="&gt;&gt;zapiszB.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="clearB.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 89</value>
   </data>
   <data name="&gt;&gt;jezykBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -504,6 +486,9 @@
   <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
+  <data name="&gt;&gt;splitContainer1.Panel2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="jezykBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -528,23 +513,26 @@
   <data name="&gt;&gt;tableLayoutPanel4.Parent" xml:space="preserve">
     <value>importBox</value>
   </data>
+  <data name="wczytajB.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="angielskiB" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="polskiB" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,130" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="importBox.Text" xml:space="preserve">
-    <value>imp/exp</value>
   </data>
   <data name="tableLayoutPanel4.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="polskiB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 21</value>
+  <data name="splitContainer1.IsSplitterFixed" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="jezykBox.Text" xml:space="preserve">
     <value>lang</value>
   </data>
   <data name="jezykBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 401</value>
+  </data>
+  <data name="tableLayoutPanel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -555,6 +543,9 @@
   <data name="removeB.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
+  <data name="&gt;&gt;splitContainer1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="tableLayoutPanel1.CellBorderStyle" type="System.Windows.Forms.TableLayoutPanelCellBorderStyle, System.Windows.Forms">
     <value>Inset</value>
   </data>
@@ -564,11 +555,14 @@
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;polskiB.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;kolorB.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="&gt;&gt;kolorB.Name" xml:space="preserve">
+    <value>kolorB</value>
+  </data>
+  <data name="mapa.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
   </data>
   <data name="mapa.Size" type="System.Drawing.Size, System.Drawing">
     <value>611, 538</value>
@@ -579,8 +573,8 @@
   <data name="edycjaBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>136, 388</value>
   </data>
-  <data name="tableLayoutPanel3.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
+  <data name="&gt;&gt;angielskiB.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -603,9 +597,6 @@
   <data name="&gt;&gt;mapa.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>784, 562</value>
-  </data>
   <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
@@ -615,14 +606,23 @@
   <data name="tableLayoutPanel2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="&gt;&gt;kolorB.Name" xml:space="preserve">
-    <value>kolorB</value>
+  <data name="clearB.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 89</value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>93, 3</value>
   </data>
+  <data name="&gt;&gt;clearB.Parent" xml:space="preserve">
+    <value>edycjaBox</value>
+  </data>
   <data name="angielskiB.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
+  </data>
+  <data name="importBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="tableLayoutPanel4.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="wczytajB" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="zapiszB" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
@@ -630,17 +630,17 @@
   <data name="jezykBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>136, 74</value>
   </data>
-  <data name="&gt;&gt;zapiszB.Parent" xml:space="preserve">
-    <value>tableLayoutPanel4</value>
+  <data name="edycjaBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>784, 562</value>
   </data>
-  <data name="&gt;&gt;splitContainer1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;angielskiB.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="importBox.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="importBox.Text" xml:space="preserve">
+    <value>imp/exp</value>
   </data>
   <data name="splitContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -657,8 +657,8 @@
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="&gt;&gt;clearB.Parent" xml:space="preserve">
-    <value>edycjaBox</value>
+  <data name="splitContainer1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="pictureBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -684,8 +684,8 @@
   <data name="&gt;&gt;tableLayoutPanel4.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="wczytajB.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
+  <data name="removeB.Text" xml:space="preserve">
+    <value>vert del</value>
   </data>
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -693,14 +693,14 @@
   <data name="jezykBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>784, 562</value>
   </data>
-  <data name="&gt;&gt;splitContainer1.Panel2.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="zapiszB.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
-  <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="polskiB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>124, 21</value>
   </data>
   <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 16</value>
