@@ -711,10 +711,19 @@
   <data name="&gt;&gt;kolorB.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="$this.Language" type="System.Globalization.CultureInfo, mscorlib">
     <value>en-GB</value>
-  </metadata>
+  </data>
+  <data name="graphLoaded" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="graphLoadFailed" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="graphSaved" xml:space="preserve">
+    <value> </value>
+  </data>
 </root>

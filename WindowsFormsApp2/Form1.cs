@@ -102,9 +102,9 @@ namespace WindowsFormsApp2
             int h = this.Height;
             int w = this.Width;
             ApplyResourceToControl(resources, this, culture);
-            //graphLoaded = resources.GetString(graphLoaded);
-            //graphLoadFailed = resources.GetString(graphLoadFailed); 
-            //graphSaved = resources.GetString(graphSaved); 
+            graphLoaded = resources.GetString("graphLoaded");
+            graphLoadFailed = resources.GetString("graphLoadFailed"); 
+            graphSaved = resources.GetString("graphSaved");
             Controls.Clear();
             InitializeComponent();
             this.Height = h; // przywrocenie rozmiaru

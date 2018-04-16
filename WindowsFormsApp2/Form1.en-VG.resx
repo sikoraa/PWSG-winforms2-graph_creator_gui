@@ -150,4 +150,13 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Graph Editor</value>
   </data>
+  <data name="graphLoaded" xml:space="preserve">
+    <value>Graph loaded successfully.</value>
+  </data>
+  <data name="graphLoadFailed" xml:space="preserve">
+    <value>File error.</value>
+  </data>
+  <data name="graphSaved" xml:space="preserve">
+    <value>Graph saved successfully.</value>
+  </data>
 </root>
