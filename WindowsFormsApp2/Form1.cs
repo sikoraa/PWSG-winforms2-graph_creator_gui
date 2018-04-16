@@ -174,13 +174,29 @@ namespace WindowsFormsApp2
                     }
 
                 }
+                //if (movingi != -1)
+                //{
+                //    int p = movingi;
+                //    movingi = g.getIndex(selectedVertex);
+                //    if (movingi < 0 || movingi > g.V.Count - 1)
+                //        movingi = p;
+                //}
                 //selectedVertex = g.getNr(e.X, e.Y, r); //r-12
                 if (selectedVertex != -1)
                     removeB.Enabled = true;
                 else
                     removeB.Enabled = false;
                 if (t != selectedVertex)
+                {
+                    if (selectedVertex != -1)
+                        movingi = g.getIndex(selectedVertex);
+                    else
+                    {
+                        moving = false;
+                        movingi = -1;
+                    }
                     drawGraph(g);
+                }
            }
             else if (((MouseEventArgs)e).Button == System.Windows.Forms.MouseButtons.Middle) // przesuwanie
             {
