@@ -77,27 +77,74 @@ namespace WindowsFormsApp2
             setCulture("pl-PL");
         }
 
-        public bool setCulture(string s)
+        private static void ApplyResourceToControl(ComponentResourceManager res, Control control, CultureInfo lang)
         {
-            CultureInfo ci = new CultureInfo(s);
-            //ResourceManager rm = new ResourceManager("WindowsFormsApp2.lang." + s, typeof(Form1).Assembly);
-            ResourceManager rm = new ResourceManager("WindowsFormsApp2.GraphEdit", Assembly.GetExecutingAssembly());
-            //ResourceManager rm = new ResourceManager("WindowsFormsApp2.lang." + s, typeof(Form1).Assembly);
+            //if (control.GetType() == typeof(MenuStrip))  // See if this is a menuStrip
+            //{
+            //    MenuStrip strip = (MenuStrip)control;
 
-            this.Text = rm.GetString("Title",ci);
-            clearB.Text = rm.GetString("BtnClearGraphText", ci);
-            kolorB.Text = rm.GetString("BtnColorChoiceText", ci);
-            removeB.Text = rm.GetString("BtnDeleteVertexText",ci);
-            angielskiB.Text = rm.GetString("BtnLangEnglishText",ci);
-            polskiB.Text = rm.GetString("BtnLangPolishText",ci);
-            wczytajB.Text = rm.GetString("BtnLoadText", ci);
-            zapiszB.Text = rm.GetString("BtnSaveText", ci);
-            importBox.Text = rm.GetString("groupBox1Text", ci);
-            edycjaBox.Text = rm.GetString("groupBox2Text", ci);
-            jezykBox.Text = rm.GetString("groupBox3Text", ci);
-            graphLoaded = rm.GetString("loadedText",ci);
-            graphLoadFailed = rm.GetString("loadFailedText",ci);
-            graphSaved = rm.GetString("savedText",ci);
+            //    ApplyResourceToToolStripItemCollection(strip.Items, res, lang);
+            //}
+
+            foreach (Control c in control.Controls) // Apply to all sub-controls
+            {
+                ApplyResourceToControl(res, c, lang);
+                res.ApplyResources(c, c.Name, lang);
+            }
+
+            // Apply to self
+            res.ApplyResources(control, control.Name, lang);
+        }
+
+        private static void ApplyResourceToToolStripItemCollection(ToolStripItemCollection col, ComponentResourceManager res, CultureInfo lang)
+        {
+            for (int i = 0; i < col.Count; i++)     // Apply to all sub items
+            {
+                ToolStripItem item = (ToolStripMenuItem)col[i];
+
+                if (item.GetType() == typeof(ToolStripMenuItem))
+                {
+                    ToolStripMenuItem menuitem = (ToolStripMenuItem)item;
+                    ApplyResourceToToolStripItemCollection(menuitem.DropDownItems, res, lang);
+                }
+
+                res.ApplyResources(item, item.Name, lang);
+            }
+        }
+    
+
+
+    public bool setCulture(string s)
+        {
+            CultureInfo culture = CultureInfo.GetCultureInfo(s);//new CultureInfo("pl-PL");
+                                                           //ResourceManager rm = new ResourceManager("WindowsFormsApp2.lang." + s, typeof(Form1).Assembly);
+                                                           //ResourceManager rm = new ResourceManager("WindowsFormsApp2.GraphEdit", Assembly.GetExecutingAssembly());
+                                                           //ResourceManager rm = new ResourceManager("WindowsFormsApp2.lang." + s, typeof(Form1).Assembly);
+            Thread.CurrentThread.CurrentUICulture = culture;
+            ComponentResourceManager resources = new ComponentResourceManager(this.GetType());
+
+            ApplyResourceToControl(resources, this, culture);
+            //resources.ApplyResources(this, "$this", culture);
+            //foreach (Control c in this.Controls)
+            //{
+            //    //ComponentResourceManager r = new ComponentResourceManager(typeof(Form1));
+
+            //    resources.ApplyResources(c, c.Name, culture);
+            //}
+            //this.Text = rm.GetString("Title",ci);
+            //clearB.Text = rm.GetString("BtnClearGraphText", ci);
+            //kolorB.Text = rm.GetString("BtnColorChoiceText", ci);
+            //removeB.Text = rm.GetString("BtnDeleteVertexText",ci);
+            //angielskiB.Text = rm.GetString("BtnLangEnglishText",ci);
+            //polskiB.Text = rm.GetString("BtnLangPolishText",ci);
+            //wczytajB.Text = rm.GetString("BtnLoadText", ci);
+            //zapiszB.Text = rm.GetString("BtnSaveText", ci);
+            //importBox.Text = rm.GetString("groupBox1Text", ci);
+            //edycjaBox.Text = rm.GetString("groupBox2Text", ci);
+            //jezykBox.Text = rm.GetString("groupBox3Text", ci);
+            //graphLoaded = rm.GetString("loadedText",ci);
+            //graphLoadFailed = rm.GetString("loadFailedText",ci);
+            //graphSaved = rm.GetString("savedText",ci);
             return true;
 
         }
