@@ -33,21 +33,12 @@ namespace WindowsFormsApp2
         string graphLoadFailed = "";
         string graphSaved = "";
         int penWidth;
-        Pen p;//= new Pen(Color.Black, penWidth);
+        Pen p;
         Pen selPen;
         Pen edgePen;
+      
 
-
-        string[] cultureNames = {  "pl-PL", "en-GB" };
-        int cultureindex = 0;
-        //CultureInfo originalCulture = Thread.CurrentThread.CurrentCulture;
-        ResourceManager rm;//= new ResourceManager("GraphEditor", typeof(Form1).Assembly);
-        Assembly assembly;
-        //ResourceManager resman;
-        
-
-
-    SolidBrush b;
+        SolidBrush b;
         Graph g = new Graph();
         int selectedVertex = -1;
 
@@ -79,16 +70,22 @@ namespace WindowsFormsApp2
 
         private static void ApplyResourceToControl(ComponentResourceManager res, Control control, CultureInfo lang)
         {
+            int h = control.Height;
+            int w = control.Width;
+            res.ApplyResources(control, control.Name, lang);
+
+            control.Height = h;
+            control.Width = w;
             foreach (Control c in control.Controls) // Apply to all sub-controls
             {
                 ApplyResourceToControl(res, c, lang);
                 res.ApplyResources(c, c.Name, lang);
             }
-            int h = control.Height;
-            int w = control.Width;
-            res.ApplyResources(control, control.Name, lang);
-            control.Height = h;
-            control.Width = w;
+            //h = control.Height;
+            //w = control.Width;
+            //res.ApplyResources(control, control.Name, lang);
+            //control.Height = h;
+            //control.Width = w;
 
         }
 
@@ -107,6 +104,9 @@ namespace WindowsFormsApp2
             graphSaved = resources.GetString("graphSaved");
             Controls.Clear();
             InitializeComponent();
+            this.Focus();
+            pictureBox1.BackColor = c;
+            this.KeyPreview = true;
             this.Height = h; // przywrocenie rozmiaru
             this.Width = w;
             drawGraph(g);
@@ -187,14 +187,6 @@ namespace WindowsFormsApp2
                     }
 
                 }
-                //if (movingi != -1)
-                //{
-                //    int p = movingi;
-                //    movingi = g.getIndex(selectedVertex);
-                //    if (movingi < 0 || movingi > g.V.Count - 1)
-                //        movingi = p;
-                //}
-                //selectedVertex = g.getNr(e.X, e.Y, r); //r-12
                 if (selectedVertex != -1)
                     removeB.Enabled = true;
                 else
@@ -289,8 +281,8 @@ namespace WindowsFormsApp2
                 }
 
                 SolidBrush bTmp = new SolidBrush(v.c);
-                    rg.DrawString((v.nr + 1).ToString(), f, bTmp, new Point(v.x, v.y), sf);
-                    bTmp.Dispose();
+                rg.DrawString((v.nr + 1).ToString(), f, bTmp, new Point(v.x, v.y), sf);
+                bTmp.Dispose();
              }
             if (mapa.Image != null)
                 mapa.Image.Dispose();
@@ -363,8 +355,6 @@ namespace WindowsFormsApp2
                 catch (Exception ex)
                 {
                     ;
-                    //MessageBox.Show(Error)
-                    //MessageBox.Show("Error: Could not save file to disk. Original error: " + ex.Message);
                 }
             }
         }
@@ -389,19 +379,15 @@ namespace WindowsFormsApp2
                         if (ext != ".graph")
                         {
                             MessageBox.Show(graphLoadFailed);
-                            //MessageBox.Show("Error: Opened file doesn't have .graph extension.");
                             return;
 
                         }
                         using (myStream)
                         {
 
-                            //this.Text = "lol";
-                            //openFileDialog1.
                             g = Graph.Import(openFileDialog1.FileName);
                             selectedVertex = -1;
                             drawGraph(g);
-                            //myStream.Close();
                             MessageBox.Show(graphLoaded);
                         }
                         myStream.Close();
@@ -410,9 +396,6 @@ namespace WindowsFormsApp2
                 catch (Exception ex)
                 {
                     MessageBox.Show(graphLoadFailed);
-                    //MessageBox.Show("ex");
-
-                    //MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
                 }
 
             }
@@ -438,15 +421,12 @@ namespace WindowsFormsApp2
                 int y = e.Y;
                 int dx = e.X - mousex;
                 int dy = e.Y - mousey;
-                //g.V[movingi] = (x, y, g.V[movingi].nr, g.V[movingi].c);
                 g.V[movingi] = (g.V[movingi].x+dx, g.V[movingi].y + dy, g.V[movingi].nr, g.V[movingi].c);
                 drawGraph(g);
                 mousex = e.X;
                 mousey = e.Y;
                 s1.Reset();
                 s1.Start();
-                //s1.Stop();
-                //s1.Start();
             }
         }
 
